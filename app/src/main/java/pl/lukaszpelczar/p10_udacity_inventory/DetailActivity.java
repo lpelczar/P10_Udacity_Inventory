@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -56,6 +57,12 @@ public class DetailActivity extends AppCompatActivity implements
 
     /** EditText field to enter the price */
     private EditText mPriceEditText;
+
+    private EditText mIndicator;
+
+    private Button decreaseButton;
+
+    private Button increaseButton;
 
     /** Boolean flag that keeps track of whether the item has been edited (true) or not (false) */
     private boolean mItemHasChanged = false;
@@ -111,6 +118,59 @@ public class DetailActivity extends AppCompatActivity implements
         mNameEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
+
+        decreaseButton = (Button)findViewById(R.id.decrease_button);
+        increaseButton = (Button)findViewById(R.id.increase_button);
+        mIndicator = (EditText)findViewById(R.id.edit_item_indicator) ;
+
+        decreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                decreaseQuantity();
+            }
+        });
+
+        increaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                increaseQuantity();
+            }
+        });
+
+    }
+
+    private void increaseQuantity(){
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+        String quantityIndicator = mIndicator.getText().toString().trim();
+        int indicator;
+        if (TextUtils.isEmpty(quantityIndicator)){
+            indicator = 1;
+        } else {
+            indicator = Integer.parseInt(quantityIndicator);
+        }
+        quantity += indicator;
+        String i = Integer.toString(quantity);
+        mQuantityEditText.setText(i);
+    }
+
+    private void decreaseQuantity(){
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+        String quantityIndicator = mIndicator.getText().toString().trim();
+        int indicator;
+        if (TextUtils.isEmpty(quantityIndicator)){
+            indicator = 1;
+        } else {
+            indicator = Integer.parseInt(quantityIndicator);
+        }
+        if (indicator > quantity) {
+            mQuantityEditText.setText("0");
+        } else {
+            quantity -= indicator;
+            String i = Integer.toString(quantity);
+            mQuantityEditText.setText(i);
+        }
     }
 
     private void checkFields() {
