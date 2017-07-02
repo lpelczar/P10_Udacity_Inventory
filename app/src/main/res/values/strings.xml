@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">P10_Udacity_Inventory</string>
+    <string name="app_name">\nInventory</string>
 
     <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
     <string name="detail_activity_title_new_item">Add an Item</string>
