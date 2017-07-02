@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">P10_Udacity_Inventory</string>
 
     <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
@@ -30,5 +30,7 @@
 
     <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_item_failed">Error with deleting item</string>
+
+    <string name="order_summary_email_subject">Order more of <xliff:g id="productName" example="Headphones">%s</xliff:g></string>
 
 </resources>

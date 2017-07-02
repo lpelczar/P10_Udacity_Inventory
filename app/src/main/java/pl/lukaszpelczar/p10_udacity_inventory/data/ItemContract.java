@@ -80,7 +80,7 @@ public class ItemContract {
         public final static String COLUMN_ITEM_QUANTITY = "quantity";
 
         /**
-         * Price of the pet.
+         * Price of the item.
          *
          * Type: INTEGER
          */

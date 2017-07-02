@@ -92,7 +92,7 @@ public class DetailActivity extends AppCompatActivity implements
             // (It doesn't make sense to delete an item that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
-            // Otherwise this is an existing item, so change app bar to say "Edit Pet"
+            // Otherwise this is an existing item, so change app bar to say "Edit Item"
             setTitle(getString(R.string.detail_activity_title_edit_item));
 
             // Initialize a loader to read the item data from the database
@@ -201,6 +201,16 @@ public class DetailActivity extends AppCompatActivity implements
         }
     }
 
+    private void orderMore(){
+        String nameString = mNameEditText.getText().toString().trim();
+        String message = "Greetings, " + "\n" + "We want to order more of: " + nameString +
+                                         "\n" + "Please contact.";
+        Uri uri = Uri.parse("smsto:0800000123");
+        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+        it.putExtra("sms_body", message);
+        startActivity(it);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
@@ -238,6 +248,9 @@ public class DetailActivity extends AppCompatActivity implements
                 showDeleteConfirmationDialog();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
+            case R.id.action_order_more:
+                orderMore();
+                return true;
             case android.R.id.home:
                 // If the item hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
@@ -404,7 +417,7 @@ public class DetailActivity extends AppCompatActivity implements
     }
 
     /**
-     * Perform the deletion of the pet in the database.
+     * Perform the deletion of the item in the database.
      */
     private void deleteItem() {
         // Only perform the delete if this is an existing item.

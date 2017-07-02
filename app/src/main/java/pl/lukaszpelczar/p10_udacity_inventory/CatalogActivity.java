@@ -85,11 +85,11 @@ public class CatalogActivity extends AppCompatActivity implements
                 // by appending the "id" (passed as input to this method) onto the
                 // {@link ItemEntry#CONTENT_URI}.
                 // For example, the URI would be "content://pl.lukaszpelczar.p10_udacity_inventory/items/2"
-                // if the pet with ID 2 was clicked on.
-                Uri currentPetUri = ContentUris.withAppendedId(ItemEntry.CONTENT_URI, id);
+                // if the item with ID 2 was clicked on.
+                Uri currentItemUri = ContentUris.withAppendedId(ItemEntry.CONTENT_URI, id);
 
                 // Set the URI on the data field of the intent
-                intent.setData(currentPetUri);
+                intent.setData(currentItemUri);
 
                 // Launch the {@link DetailActivity} to display the data for the current item.
                 startActivity(intent);
@@ -101,7 +101,7 @@ public class CatalogActivity extends AppCompatActivity implements
     }
 
     /**
-     * Helper method to insert hardcoded pet data into the database. For debugging purposes only.
+     * Helper method to insert hardcoded item data into the database. For debugging purposes only.
      */
     private void insertItem() {
         ContentValues values = new ContentValues();
