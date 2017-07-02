@@ -121,6 +121,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         quantityTextView.setText(quantityField);
         priceTextView.setText(priceField);
 
+
     }
 
 }

@@ -32,9 +32,18 @@
                 android:value=".CatalogActivity" />
         </activity>
         <provider
-            android:name=".data.ItemProvider"
+            android:name="pl.lukaszpelczar.p10_udacity_inventory.data.ItemProvider"
             android:authorities="pl.lukaszpelczar.p10_udacity_inventory"
             android:exported="false" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="pl.lukaszpelczar.p10_udacity_inventory.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
     </application>
 
 </manifest>

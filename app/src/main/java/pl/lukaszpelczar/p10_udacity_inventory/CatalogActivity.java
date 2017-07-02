@@ -44,6 +44,8 @@ public class CatalogActivity extends AppCompatActivity implements
     /** Identifier for the item data loader */
     private static final int ITEM_LOADER = 0;
 
+    private static String NO_PHOTO = "";
+
     /** Adapter for the ListView */
     ItemCursorAdapter mCursorAdapter;
 
@@ -113,6 +115,7 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(ItemEntry.COLUMN_ITEM_NAME, "Sluchawki");
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, 234);
         values.put(ItemEntry.COLUMN_ITEM_PRICE, 23);
+        values.put(ItemEntry.COLUMN_ITEM_PHOTO, NO_PHOTO);
 
         // Insert a new row into the provider using the ContentResolver.
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
@@ -160,7 +163,8 @@ public class CatalogActivity extends AppCompatActivity implements
                 ItemEntry._ID,
                 ItemEntry.COLUMN_ITEM_NAME,
                 ItemEntry.COLUMN_ITEM_QUANTITY,
-                ItemEntry.COLUMN_ITEM_PRICE};
+                ItemEntry.COLUMN_ITEM_PRICE,
+                ItemEntry.COLUMN_ITEM_PHOTO};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context

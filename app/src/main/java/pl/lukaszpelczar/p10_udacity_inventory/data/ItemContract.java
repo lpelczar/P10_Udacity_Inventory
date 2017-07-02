@@ -86,6 +86,12 @@ public class ItemContract {
          */
         public final static String COLUMN_ITEM_PRICE = "price";
 
+        /**
+         * Photo of the item.
+         *
+         */
+        public final static String COLUMN_ITEM_PHOTO = "photo";
+
     }
 
 }
