@@ -60,8 +60,6 @@ public class DetailActivity extends AppCompatActivity implements
     /** Boolean flag that keeps track of whether the item has been edited (true) or not (false) */
     private boolean mItemHasChanged = false;
 
-    private boolean mCantSave = false;
-
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mItemHasChanged boolean to true.
@@ -115,10 +113,8 @@ public class DetailActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
     }
 
-    /**
-     * Get user input from editor and save item into database.
-     */
-    private void saveItem() {
+    private void checkFields() {
+
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
@@ -132,8 +128,31 @@ public class DetailActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(priceString)) {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
+            finish();
             return;
         }
+
+        if (TextUtils.isEmpty(nameString) || TextUtils.isEmpty(quantityString) ||
+                TextUtils.isEmpty(priceString)){
+            Toast.makeText(this, "All fields need to be populated!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            saveItem();
+            finish();
+        }
+
+    }
+
+    /**
+     * Get user input from editor and save item into database.
+     */
+    private void saveItem() {
+
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String nameString = mNameEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
 
         // Create a ContentValues object where column names are the keys,
         // and item attributes from the editor are the values.
@@ -141,24 +160,10 @@ public class DetailActivity extends AppCompatActivity implements
         values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
         values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
-
-        if (!TextUtils.isEmpty(quantityString)) {
-            int quantity = Integer.parseInt(quantityString);
-            values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
-        } else {
-            Toast.makeText(this, "quantity",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!TextUtils.isEmpty(priceString)) {
-            int price = Integer.parseInt(priceString);
-            values.put(ItemEntry.COLUMN_ITEM_PRICE, price);
-        } else {
-            Toast.makeText(this, "price",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
+        int quantity = Integer.parseInt(quantityString);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
+        int price = Integer.parseInt(priceString);
+        values.put(ItemEntry.COLUMN_ITEM_PRICE, price);
 
         // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
         if (mCurrentItemUri == null) {
@@ -225,10 +230,7 @@ public class DetailActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                // Save item to database
-                saveItem();
-                // Exit activity
-                finish();
+                checkFields();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

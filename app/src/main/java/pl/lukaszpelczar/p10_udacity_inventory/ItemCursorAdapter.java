@@ -86,7 +86,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         int itemPrice = cursor.getInt(priceColumnIndex);
 
         String quantityField = "Quantity: " + Integer.toString(itemQuantity);
-        String priceField = "Pride: " + Integer.toString(itemPrice);
+        String priceField = "Price: " + Integer.toString(itemPrice);
 
         // Update the TextViews with the attributes for the current item
         nameTextView.setText(itemName);
