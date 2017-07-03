@@ -47,7 +47,7 @@ public class CatalogActivity extends AppCompatActivity implements
     private static String NO_PHOTO = "";
 
     /** Adapter for the ListView */
-    ItemCursorAdapter mCursorAdapter;
+    private ItemCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

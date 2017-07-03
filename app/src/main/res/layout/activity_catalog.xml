@@ -35,7 +35,7 @@
             android:paddingTop="8dp"
             android:text="Click button on the right bottom to add an item."
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#A2AAB0" />
+            android:textColor="@color/emptyView" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

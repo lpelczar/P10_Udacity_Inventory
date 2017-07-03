@@ -40,7 +40,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -65,13 +64,11 @@ import pl.lukaszpelczar.p10_udacity_inventory.data.ItemContract.ItemEntry;
 public class DetailActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
     private static final int PICK_IMAGE_REQUEST = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST = 2;
     private Uri mUri;
     private Bitmap mBitmap;
-    private static final String CAMERA_DIR = "/dcim/";
     String mCurrentPhotoPath;
     private ImageView mImageView;
     private Button mButtonTakePicture;
@@ -223,7 +220,6 @@ public class DetailActivity extends AppCompatActivity implements
 
     public void openImageSelector(View view) {
         Intent intent;
-        Log.e(LOG_TAG, "While is set and the ifs are worked through.");
 
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -231,8 +227,6 @@ public class DetailActivity extends AppCompatActivity implements
             intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
         }
-
-        Log.e(LOG_TAG, "Check write to external permissions");
 
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
@@ -273,12 +267,10 @@ public class DetailActivity extends AppCompatActivity implements
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        Log.i(LOG_TAG, "Received an \"Activity Result\"");
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 mUri = resultData.getData();
-                Log.i(LOG_TAG, "Uri: " + mUri.toString());
                 mBitmap = getBitmapFromUri(mUri);
                 mImageView.setImageBitmap(mBitmap);
                 mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -286,7 +278,6 @@ public class DetailActivity extends AppCompatActivity implements
                 isGalleryPicture = true;
             }
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            Log.i(LOG_TAG, "Uri: " + mUri.toString());
 
             mBitmap = getBitmapFromUri(mUri);
             mImageView.setImageBitmap(mBitmap);
@@ -329,7 +320,6 @@ public class DetailActivity extends AppCompatActivity implements
                 return image;
             }
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Failed to load image.", e);
             return null;
         } finally {
             try {
@@ -338,7 +328,6 @@ public class DetailActivity extends AppCompatActivity implements
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.e(LOG_TAG, "Error closing ParcelFile Descriptor");
             }
         }
     }
@@ -408,7 +397,7 @@ public class DetailActivity extends AppCompatActivity implements
         }
 
         if (TextUtils.isEmpty(nameString) || TextUtils.isEmpty(quantityString) ||
-                TextUtils.isEmpty(priceString)){
+                TextUtils.isEmpty(priceString) || mUri == null || mUri.equals(Uri.EMPTY)){
             Toast.makeText(this, "All fields need to be populated!",
                     Toast.LENGTH_SHORT).show();
         } else {

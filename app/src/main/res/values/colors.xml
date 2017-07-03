@@ -14,4 +14,6 @@
 
     <!-- Primary dark color for the editor -->
     <color name="detailColorPrimaryDark">#394450</color>
+
+    <color name="emptyView">#A2AAB0</color>
 </resources>

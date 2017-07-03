@@ -11,8 +11,6 @@ import pl.lukaszpelczar.p10_udacity_inventory.data.ItemContract.ItemEntry;
  */
 public class ItemDbHelper extends SQLiteOpenHelper {
 
-    public static final String LOG_TAG = ItemDbHelper.class.getSimpleName();
-
     /** Name of the database file */
     private static final String DATABASE_NAME = "inventory.db";
 
@@ -52,14 +50,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(db);
+        // The database is still at version 1, so there's nothing to do be done here.
     }
-
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
-    }
-
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + ItemEntry.TABLE_NAME;
 
 }
