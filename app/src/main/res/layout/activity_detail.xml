@@ -30,6 +30,7 @@
                 android:id="@+id/edit_item_name"
                 style="@style/EditorFieldStyle"
                 android:hint="Product Name"
+                android:maxLength="25"
                 android:inputType="textCapWords" />
 
             <LinearLayout
@@ -52,6 +53,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/edit_item_quantity"
                     android:fontFamily="sans-serif-light"
+                    android:maxLength="6"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:hint="Quantity"
                     android:inputType="number" />
@@ -75,6 +77,7 @@
                     android:id="@+id/edit_item_price"
                     style="@style/EditorFieldStyle"
                     android:hint="Price"
+                    android:maxLength="6"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -106,6 +109,7 @@
             android:id="@+id/edit_item_indicator"
             android:fontFamily="sans-serif-light"
             android:textAppearance="?android:textAppearanceMedium"
+            android:maxLength="4"
             android:hint="1"
             android:inputType="number" />
 
