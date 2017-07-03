@@ -345,7 +345,12 @@ public class DetailActivity extends AppCompatActivity implements
 
 
     private void increaseQuantity(){
-        String quantityString = mQuantityEditText.getText().toString().trim();
+        String quantityString;
+        if (TextUtils.isEmpty(mQuantityEditText.getText().toString().trim())){
+            quantityString = "0";
+        } else {
+            quantityString = mQuantityEditText.getText().toString().trim();
+        }
         int quantity = Integer.parseInt(quantityString);
         String quantityIndicator = mIndicator.getText().toString().trim();
         int indicator;
@@ -360,7 +365,12 @@ public class DetailActivity extends AppCompatActivity implements
     }
 
     private void decreaseQuantity(){
-        String quantityString = mQuantityEditText.getText().toString().trim();
+        String quantityString;
+        if (TextUtils.isEmpty(mQuantityEditText.getText().toString().trim())){
+            quantityString = "0";
+        } else {
+            quantityString = mQuantityEditText.getText().toString().trim();
+        }
         int quantity = Integer.parseInt(quantityString);
         String quantityIndicator = mIndicator.getText().toString().trim();
         int indicator;
