@@ -10,4 +10,6 @@ Project 10: Inventory App - Create an app to track the inventory of a retail sto
 
 ## Screenshots
 
-![inventory](http://i66.tinypic.com/n2ogvl.jpg)
+<img src="https://raw.github.com/lpelczar/P10_Udacity_Inventory/master/screenshots/p10-1.png" width="600">
+
+<img src="https://raw.github.com/lpelczar/P10_Udacity_Inventory/master/screenshots/p10-2.png" width="600">
